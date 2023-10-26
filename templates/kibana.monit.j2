@@ -1,0 +1,8 @@
+check process kibana with pidfile /var/run/kibana/kibana.pid
+  start program = "/etc/init.d/kibana start"
+  stop program  = "/etc/init.d/kibana stop"
+  if failed host 127.0.0.1 port 5601 protocol http
+    and request "/app/home"
+    with timeout 10 seconds
+  then restart
+  if 3 restarts within 5 cycles then timeout

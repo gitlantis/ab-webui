@@ -1,0 +1,19 @@
+---
+- name: Configure Nginx
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/default
+
+- name: Check if Symbolic Link Exists
+  stat:
+    path: /etc/nginx/sites-enabled/default
+  register: link_status
+  
+- name: Enable Nginx site
+  command: ln -s /etc/nginx/sites-available/kibana /etc/nginx/sites-enabled/
+  when: not link_status.stat.exists
+  
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted

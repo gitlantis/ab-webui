@@ -1,0 +1,9 @@
+---
+- import_tasks: tasks/packages.yml
+- import_tasks: tasks/ntp.yml
+- import_tasks: tasks/monit.yml
+- import_tasks: tasks/rsyslog.yml
+- import_tasks: tasks/kibana.yml
+- import_tasks: tasks/nginx.yml
+- import_tasks: tasks/get_id.yml
+

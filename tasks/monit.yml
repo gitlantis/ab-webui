@@ -1,0 +1,16 @@
+---
+- name: Configure Monit
+  template:
+    src: monitrc.j2
+    dest: /etc/monit/monitrc
+
+- name: Create Monit rule for Kibana
+  template:
+    src: kibana.monit.j2
+    dest: /etc/monit/conf.d/kibana 
+
+- name: Enable Monit service
+  service:
+    name: monit
+    enabled: yes
+    state: started
